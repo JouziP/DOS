@@ -1,4 +1,4 @@
 # -*- coding: utf-8 -*-
 
-def getSampleEnergyArray(energy_array, **args):
+def getDOS(energy_array, **args):
     pass
