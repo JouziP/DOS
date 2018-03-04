@@ -40,6 +40,7 @@ def generateNumberMatrix(**args):
         ##
         n_attmpt+=1
 #        print n_attmpt
+#    print samples_matrix
     return samples_matrix
 
         
