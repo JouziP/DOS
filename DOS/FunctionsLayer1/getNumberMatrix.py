@@ -39,7 +39,7 @@ def generateNumberMatrix(**args):
         samples_matrix = np.matrix(samples_matrix)
         ##
         n_attmpt+=1
-        print n_attmpt
+#        print n_attmpt
     return samples_matrix
 
         
