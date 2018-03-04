@@ -17,6 +17,14 @@ def getBinaryArray(vecLen, num):
         binaryVec.append(int(num));
         while len(binaryVec)<vecLen:
             binaryVec.append(int(0))
+        binaryVec.reverse()
         return binaryVec
     else:
         return    
+    
+
+
+### testing
+vecLen=12
+num = 23
+binary = getBinaryArray(vecLen, num)
