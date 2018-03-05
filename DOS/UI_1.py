@@ -13,8 +13,8 @@ from DOS.FunctionsLayer2.getPartitionFunctionZ import getPartitionFunctionZ
 
 np.random.seed(1201)
 ### inputs
-N1=6
-N2=6
+N1=10
+N2=10
 
 args={}
 args['J_const']=1.0
@@ -33,21 +33,30 @@ args['first_neighb']=True
 neighbors_tables_list = constructLattice(**args)
 args['neighbors_table']=neighbors_tables_list
 
-args['max_n_spins_in_basket']=16  #N1*N2/10
-args['N_samples']=7000
-args['num_bins']=500
+args['max_n_spins_in_basket']=25 #N1*N2/10
+args['N_samples']=10000
+args['num_bins']=1000
 ###########################
 sampleEnergy_array = getSampleEnergyArray(**args)
 ###
 energy_hist = getEnergyHist(sampleEnergy_array, **args)
+############################
+#Temp_init = 10
+#Temp_fin = 0.001
+#num_temp=40
+#dTemp = (Temp_fin-Temp_init)* 1./num_temp
+#Temps = [Temp_init + t*dTemp  for t in range(num_temp) ]
+#Betas = [1./Temp for Temp in Temps]
+############################
+beta_init = 10
+beta_fin = 0.001
+num_temp=1000
+dBeta = (beta_fin-beta_init)* 1./num_temp
+Betas = [beta_init + t*dBeta  for t in range(num_temp) ]
+Temps = [1./beta for beta in Betas]
+Temps.reverse()
 ###########################
-Temp_init = 10
-Temp_fin = 0.001
-num_temp=40
-###########################
-dTemp = (Temp_fin-Temp_init)* 1./num_temp
-Temps = [Temp_init + t*dTemp  for t in range(num_temp) ]
-Betas = [1./Temp for Temp in Temps]
+
 log_Z_vs_temp=np.zeros([num_temp, 2])
 energy_expectation_dt = np.zeros([num_temp, 2])
 for b in range(num_temp):
@@ -76,8 +85,8 @@ dLogZ_vs_temp[:, 1]= np.array([log_Z_vs_temp[b+1,1 ]-log_Z_vs_temp[b, 1]\
 dLogZ_vs_temp[:, 0]=Temps[1:]
 #######
 dEBeta_vs_temp=np.zeros([num_temp-1, 2])
-dEBeta_vs_temp[:, 1]= np.array([ energy_expectation_dt[b+1,1 ]*(Betas[b+1])\
-                                 - energy_expectation_dt[b,1 ]*(Betas[b])
+dEBeta_vs_temp[:, 1]= np.array([ energy_expectation_dt[b+1,1 ]*(1./Temps[b+1])\
+                                 - energy_expectation_dt[b,1 ]*(1./Temps[b])
        for b in range(num_temp-1)])
 dEBeta_vs_temp[:, 0]=Temps[1:]
 
