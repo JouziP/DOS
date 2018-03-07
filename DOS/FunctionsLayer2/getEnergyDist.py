@@ -1,26 +1,22 @@
 # -*- coding: utf-8 -*-
 
 import numpy as np
+from collections import Counter
 
-def getEnergyHist(energy_array, **args):
-    if 'num_bins' in args:
-        num_bins = args['num_bins']
-    else:
-        num_bins = 10
-    energy_min = np.min(energy_array)
-    energy_max = np.max(energy_array)
-    dEnergy=(energy_max - energy_min)/num_bins
+
+def getEnergyDist(energy_array, **args):
+    _precision = 2
+    energy_list = list(energy_array)
+    energy_list = [np.round(energy_list[i], _precision)\
+                                   for i in range(len(energy_list))]
+    enegy_dict  = Counter(energy_list)
+    energy_unique_list = [float(key) for key in enegy_dict.keys()]
+    energy_unique_count_list = [float(val) for val in enegy_dict.values()]
     ####
+    num_bins = len(energy_unique_list)
     energy_hist=np.zeros([num_bins, 2])
-    for b in range(num_bins):
-        energy_hist[b, 0]=energy_min + b*dEnergy
-        #
-        for E in energy_array:      
-            #
-            if E>=energy_min+b*dEnergy and E< energy_min+(b+1)*dEnergy:
-                energy_hist[b, 1]+=1
-    energy_hist[:, 1]=energy_hist[:, 1]
-    energy_hist[:, 0]=energy_hist[:, 0]
+    energy_hist[:, 0]=energy_unique_list
+    energy_hist[:, 1]=energy_unique_count_list
     ####
     return energy_hist
     

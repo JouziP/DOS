@@ -9,7 +9,7 @@ def convertNumberMatrix2SpinConfigs(samples_matrix,
                                     **args):
     N_spins = args['N_spins']
     max_n_spins_in_basket = args['max_n_spins_in_basket']
-    N_samples = args['N_samples']
+    N_samples = samples_matrix.shape[0]
     ################
     num_baskets = (N_spins/max_n_spins_in_basket+1,
                    N_spins/max_n_spins_in_basket)\
@@ -42,7 +42,7 @@ def convertNumberMatrix2SpinConfigs(samples_matrix,
         sampleSpinConfigsMatrix[row, :] = np.array(binaryArray)
     return sampleSpinConfigsMatrix
     
-#### testing 
+### testing 
 #from getNumberMatrix import generateNumberMatrix
 ##
 #args={}

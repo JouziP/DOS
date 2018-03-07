@@ -3,11 +3,23 @@
 
 import numpy as np
 
-def getPartitionFunctionZ(energy_hist, beta,  **args):
+def getPartitionFunctionZ(energy_hist, beta, E_0, **args):
     Z=0
+    #### subtract the min energy from all energies:   
+#    Z_0 = np.exp(-beta*(energy_expct_beta*args['N1'] *args['N2']) )
+#    Z_0 = np.exp(-beta*( energy_hist[0,0]) ) 
+    #####
+#    E_0 = energy_hist[0,0]
+#    E_0=0
+#    sigma  = energy_hist[-1,0]  - energy_hist[0,0]
+    sigma=1
+#    E_0=+args['N1']*args['N2']*.8
+    energies=(energy_hist[:, 0]-E_0)/sigma
+    ####
     for b in range(energy_hist.shape[0]):
-        energy = energy_hist[b, 0]
+        energy = energies[b]
         energy_density = energy_hist[b, 1]
+#        print energy_density * np.exp(-beta*energy)
         Z+=energy_density * np.exp(-beta*energy)
     return Z
 

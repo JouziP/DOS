@@ -25,6 +25,6 @@ def getBinaryArray(vecLen, num):
 
 
 ### testing
-vecLen=12
-num = 23
-binary = getBinaryArray(vecLen, num)
+#vecLen=12
+#num = 23
+#binary = getBinaryArray(vecLen, num)

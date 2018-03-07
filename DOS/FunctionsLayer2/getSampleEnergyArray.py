@@ -3,15 +3,15 @@
 import numpy as np
 
 
-from DOS.FunctionsLayer1.getNumberMatrix import generateNumberMatrix
-from DOS.FunctionsLayer1.convertNumberMatrix2SpinConfigs import \
+from FunctionsLayer1.getNumberMatrix import generateNumberMatrix
+from FunctionsLayer1.convertNumberMatrix2SpinConfigs import \
                 convertNumberMatrix2SpinConfigs
-from DOS.FunctionsLayer1.getEnergyOfSpinConfig import getEnergyOfConfig
+from FunctionsLayer1.getEnergyOfSpinConfig import getEnergyOfConfig
                 
 
 
 def getSampleEnergyArray(**args):
-    samples_matrix = generateNumberMatrix(**args)
+    samples_matrix , N_sampled = generateNumberMatrix(**args)
     sample_spinConfigsMatrix = convertNumberMatrix2SpinConfigs(samples_matrix, 
                                                          **args)
     
@@ -19,7 +19,7 @@ def getSampleEnergyArray(**args):
     for s in range(sample_spinConfigsMatrix.shape[0]):
         sampleSpinConfig = sample_spinConfigsMatrix[s, :]
         sampleEnergy_list.append(getEnergyOfConfig(sampleSpinConfig, **args))
-    return np.array(sampleEnergy_list)
+    return np.array(sampleEnergy_list) , N_sampled
 
 
         
