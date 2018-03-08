@@ -10,7 +10,9 @@ def updateCluster(config_current,
                   idxs_current, 
                   E_current,
                   E_target,
-                  N,  **args):
+                  N,  
+                  rule,
+                  **args):
     max_cluster_size = args['max_cluster_size'] + 1
     ###
     idxs_new = shuffleIndxs(idxs_current, N)
@@ -34,9 +36,14 @@ def updateCluster(config_current,
         E_current = E_new
     else:
         r = np.random.uniform(1)
-        if r<dist_current * 1./dist_new:
-            for n in cluster: config_current[n] *=-1
-            E_current = E_new
+        if rule==1:
+            if r<dist_current * 1./dist_new:
+                for n in cluster: config_current[n] *=-1
+                E_current = E_new
+        if rule==2:
+            if r>dist_current * 1./dist_new:
+                for n in cluster: config_current[n] *=-1
+                E_current = E_new
     return config_current, idxs_new, E_current, dE_2add
     
     

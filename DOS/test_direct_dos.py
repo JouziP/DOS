@@ -12,13 +12,13 @@ N1=3
 N2=3
 #np.random.seed(1251)
 args={}
-args['J_const']=-1.0
+args['J_const']=1.0
 args['E_field']=0.0
 args['power']=3.0
 #########
 a1_x= 1.0
 a1_y= 0
-theta=np.pi/2
+theta=np.pi/3
 a2_x=np.cos(theta)
 a2_y=np.sin(theta)
 ##
@@ -44,5 +44,9 @@ for i in range(2**(N1*N2)):
     E_s.append(E)
 #    print config, E
 print np.min(E_s), np.max(E_s)
-plt.hist(E_s, len(E_s))
+plt.hist(E_s, 200)
+
+
+
+
 #### 4 * 4 ===> -21.1949051216 48.5294289008

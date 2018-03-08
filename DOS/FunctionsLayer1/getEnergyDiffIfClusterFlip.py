@@ -29,13 +29,13 @@ def getEnergyDiffIfClusterFlip(cluster,
     return energy_2b_added_if_cluster_is_flipped
                 
 
-#
+
 ##### test 
 ###### test
 #from DOS.FunctionsLayer1.Lattices.latticeConstructor import constructLattice
-#N1=3
-#N2=3
-##np.random.seed(1251)
+#N1=4
+#N2=4
+#np.random.seed(1251)
 #args={}
 #args['J_const']=1.0
 #args['E_field']=0.0
@@ -56,13 +56,28 @@ def getEnergyDiffIfClusterFlip(cluster,
 #
 #from DOS.BasicFunctions.getRandomConfig import getRandomConfig
 #from DOS.BasicFunctions.shuffleIndxs import shuffleIndxs
+#from DOS.FunctionsLayer1.getEnergyOfSpinConfig import getEnergyOfConfig
 #
 #N = N1 * N2
 #config_current = getRandomConfig(N)
 #indxs_current = [i for i in range(N)]
 #indxs_new = shuffleIndxs(indxs_current, N)
-#cluster = indxs_new[:N1]
+#cluster = indxs_new[:1]
 #print config_current
-#print getEnergyDiffIfClusterFlip(cluster, 
+#print cluster
+#E_current =getEnergyOfConfig(config_current, **args)
+#print E_current
+#for i in range(100):
+#    dE =  getEnergyDiffIfClusterFlip(cluster, 
 #                               config_current, 
 #                                **args)
+#    new_config = config_current
+#    for i in cluster: 
+#        new_config[i] = new_config[i]*-1
+#    #print new_config
+#    E_exact=getEnergyOfConfig(config_current, **args)
+#    print np.round(E_current+ dE, 5)==np.round(E_exact,5)
+#    E_current = E_current + dE
+#    indxs_new = shuffleIndxs(indxs_current, N)
+#    cluster = indxs_new[:1]
+

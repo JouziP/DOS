@@ -13,11 +13,13 @@ def getEnergyDist(energy_array, **args):
     energy_unique_list = [float(key) for key in enegy_dict.keys()]
     energy_unique_count_list = [float(val) for val in enegy_dict.values()]
     ####
-    num_bins = len(energy_unique_list)
+    num_bins = len(energy_unique_count_list)
+    print num_bins
     energy_hist=np.zeros([num_bins, 2])
     energy_hist[:, 0]=energy_unique_list
     energy_hist[:, 1]=energy_unique_count_list
     ####
+    energy_hist=energy_hist[np.argsort(energy_hist[:,0])]
     return energy_hist
     
     
