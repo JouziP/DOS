@@ -47,8 +47,8 @@ args['number_of_attempt_2_sample']=20
 ##
 args['E_lower_bound'] =-300
 args['E_upper_bound'] =+300
-args['num_energy_windows']=300
-args['num_sweeps'] =10
+args['num_energy_windows']=200
+args['num_sweeps'] =2
 #
 energys_collected,\
                   configs_collected,\
@@ -82,13 +82,13 @@ for b in range(num_temp):
         energy_expct_beta=getEnergyExpectation(energy_hist, beta, E_0, **args)*\
         1./(N1*N2)
         energy2_expct_beta=getEnergy2Expectation(energy_hist, beta, E_0, **args)*\
-        1./(N1*N2)
+        1./(N1*N2)**2
         ### per spin
         energy_expectation_dt[b, 0]=Temp
         energy_expectation_dt[b, 1]=energy_expct_beta
         energy2_expectation_dt_cumlt[b, 0]=Temp
-        energy2_expectation_dt_cumlt[b, 1]=(energy2_expct_beta )#*\
-#                            1./Temp**2
+        energy2_expectation_dt_cumlt[b, 1]=(energy2_expct_beta - energy_expct_beta**2)*\
+                            1./Temp**2
         ####
         Z = getPartitionFunctionZ(energy_hist, beta, E_0,g_E_0,  **args)
         log_Z_beta=np.log(Z)
@@ -113,6 +113,7 @@ frame[1].plot(Temps, energy2_expectation_dt_cumlt[:, 1],
      '-o', label='<E^2>-<E>**2 per spin')
 frame[2].plot(Temps, S_vs_beta,
      '-o', label='S per spin')
+
 print S_vs_beta, len(energys_collected)
 #plt.hist(energys_collected, 200)
 #plt.hist(collected_E_exact_calculation, len(collected_E_exact_calculation))

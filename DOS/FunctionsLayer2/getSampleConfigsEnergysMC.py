@@ -47,7 +47,7 @@ def getSampleConfigsEnergysMC(**args):
     count = 0
     for E_mark in E_marks:
         count+=1
-        if count >= 2*num_energy_windows: 
+        if count >= 1*num_energy_windows: 
             rule=2
         else:
             rule=1
